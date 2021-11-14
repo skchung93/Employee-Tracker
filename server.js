@@ -142,17 +142,14 @@ function addDepartment(){
         db.query(`INSERT INTO department SET ?`,
             {
                 name: answer.name
-            },
+            });
+            console.log('Department created!');
+            starter();
             (err, res) =>{
                 if (err) {
                     console.log(err);
                 }
-                else{
-                    console.log('Department created!');
-                    starter();
-                };
             }
-        );
     })
 }
 
@@ -187,16 +184,14 @@ function addRole(){
                 title: answers.title,
                 salary: answers.salary,
                 department_id: answers.department,
-            },
+            });
+            console.log('Role added!');
+            starter();
             (err, res) =>{
                 if (err) {
                     console.log(err);
                 }
-                else{
-                    console.log('Role added!');
-                    starter();
-                };
-            })
+            }
         });
     });
 };
@@ -241,21 +236,23 @@ function addEmployee(){
                 choices: managerNames
             }
         ]).then((answers) => {
-            db.query(`INSERT INTO employee set?`,
+            db.query(`INSERT INTO employee set ?`,
             {
                 first_name: answers.firstname,
                 last_name: answers.lastname,
                 role_id: answers.role,
                 manager_id: answers.manager,
             });
+            console.log('Employee added!');
+            starter();
             (err, res) => {
                 if (err) {
                     console.log(err);
                 }
-                else{
-                    console.log('Employee added!');
-                    starter();
-                };
+                // else{
+                //     console.log('Employee added!');
+                //     starter();
+                // };
             }
         });
     });
@@ -279,28 +276,29 @@ function updateEmployeeRole(){
     inquirer.prompt([
         {
             type: "list",
-            mesage: "Select an employee",
+            message: "Select an employee",
             name: "employee",
             choices: employeeNames
         },
         {
             type: "list",
-            mesage: "Select a role",
+            message: "Select a role",
             name: "newRole",
             choices: roleNames
         }
-    ]);
+    ]).then((answers) => {
+        db.query(`UPDATE employee SET role_id = ${answers.newRole} WHERE id = ${answers.employee}`)
+    
+        console.log('Employee role updated!');
+        starter();
         (err, res) => {
             if (err) {
                 console.log(err);
             }
-            else{
-                console.log('Employee role updated!');
-                starter();
-            }
         };
     });
-}
+    });
+}   
 
 
 //Calling the starter to get the application going
