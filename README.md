@@ -33,3 +33,5 @@ Have fun testing out the code :)
 #### Email & Github <a name="contact"></a>
 SKCHUNG93@GMAIL.COM </br>
 https://github.com/skchung93/  
+
+https://user-images.githubusercontent.com/85310173/141702774-635b8c59-d735-4b7b-ad6a-f2863b63af22.mov
